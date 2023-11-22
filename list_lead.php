@@ -6,7 +6,7 @@
 
     $sql = mysqli_query($conn, "SELECT ld.lead_name, ld.mobile_1, ld.mobile_2 , ld.email, ld.address, ld.created_by, CONCAT(DATE_FORMAT(ld.dateTime, '%D'), ' ', DATE_FORMAT(ld.dateTime, '%b %Y'))AS created_date,
                                 ed.travellers, ed.child, CONCAT(DATE_FORMAT(ed.from_date, '%D'), ' ', DATE_FORMAT(ed.from_date, '%b %Y'))AS from_date, CONCAT(DATE_FORMAT(ed.to_date, '%D'), ' ', DATE_FORMAT(ed.to_date, '%b %Y'))AS to_date, ed.days, ed.budget, ed.enq_remarks, ed.quoted_value, ed.handling_by,
-                                DATE_FORMAT(ed.from_date, '%d-%m-%y')AS actual_from_date , DATE_FORMAT(ed.to_date, '%d-%m-%y') actual_to_date,
+                                DATE_FORMAT(ed.from_date, '%m-%d-%y')AS actual_from_date , DATE_FORMAT(ed.to_date, '%m-%d-%y') actual_to_date,
                                 (fd.id)AS follow_id ,fd.follow_up_status, CONCAT(DATE_FORMAT(fd.follow_up_date, '%D'), ' ', DATE_FORMAT(fd.follow_up_date, '%b %Y')) AS follow_up_date, fd.follow_up_reason,
                                 (lde.id)AS des_id, lde.destination,
                                 dd.city_name,

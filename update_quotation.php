@@ -5,7 +5,6 @@
     $lead_id = mysqli_real_escape_string($conn, $_POST["lead_id"]);
     $qtn_value = mysqli_real_escape_string($conn, $_POST["qtn_value"]);
     $qtn_update_remarks = mysqli_real_escape_string($conn, $_POST["qtn_update_remarks"]);
-    $dateTime = date("Y-m-d H:i:s");
 
     $file_name = $_FILES['qtn_file']['name'];
     $file_basename = basename($file_name);

@@ -1,9 +1,6 @@
 <?php
     include("../db/conn.php");
     $res = [];
-    // $alt_mobile = 0;
-    // $email = 0;
-    // $children_age = 0;
 
     $lead_id = mysqli_real_escape_string($conn, $_POST["lead_id"]);
     $customer_name = mysqli_real_escape_string($conn, $_POST["customer_name"]);
@@ -24,19 +21,10 @@
     $follow_remarks = mysqli_real_escape_string($conn, $_POST["follow_remarks"]);
     $dateTime = date('Y-m-d H:i:s');
 
-    // $handling_by = 
-    $quoted_value = 0;
     $alt_mobile = mysqli_real_escape_string($conn, $_POST["alt_mobile"]);
     $email = mysqli_real_escape_string($conn, $_POST["email"]);
     $children_age = mysqli_real_escape_string($conn, $_POST["children_age"]);
-    // $created_by = 1;
-    // if(isset($_POST["mobile_2"]) && isset($_POST['mobile_2']) !== '' ){
-    // }
-
-    // if(isset($_POST["email"]) && isset($_POST['email']) !== '' ){
-    // }
-    // if(isset($_POST["children_age"]) && isset($_POST['children_age']) !== '' ){
-    // }
+    $created_by = 1;
 
     if($lead_id == 0) {
         
@@ -46,12 +34,10 @@
         if($sql){
 
             $inserted_lead_id = mysqli_insert_id($conn);
-            $sql2 = mysqli_query($conn,"INSERT INTO enquiry_data (`lead_id`, `travellers`, `child`, `from_date`, `to_date`, `checklist`, `budget`, `handling_by`, `quoted_value`, `days`, `enq_remarks`, `created_by`, `status`, `dateTime`)
-                                    VALUES ('$inserted_lead_id', '$traveller_count', '$children_age', '$from_date', '$to_date', '$checklist', '$budget', '$created_by', '$quoted_value', '$travelling_days', '$remarks', '$created_by','Active', '$dateTime')");
+            $sql2 = mysqli_query($conn,"INSERT INTO enquiry_data (`lead_id`, `travellers`, `child`, `from_date`, `to_date`, `days`,`created_by`, `status`, `dateTime`) 
+                                    VALUES ('$inserted_lead_id', '$traveller_count', '$children_age', '$from_date', '$to_date', '$travelling_days', '$created_by','Active', '$dateTime')");
 
-            foreach ($lead_dest_id as $destination_id) {
-                $sql3 = mysqli_query($conn, "INSERT INTO lead_destination (`lead_id`, `destination`, `created_by`, `status`, `dateTime`) VALUES ('$inserted_lead_id', '$destination_id', '$created_by', 'Active', '$dateTime')");
-            }
+            $sql3 = mysqli_query($conn,"INSERT INTO lead_destination (`lead_id`, `destination`, `created_by`, `status`, `dateTime`) VALUES ('$inserted_lead_id', '$destination', '$created_by', 'Active', '$dateTime')");
 
             $sql4 = mysqli_query($conn,"INSERT INTO follow_up_data (`lead_id`, `follow_up_status`, `follow_up_date`, `follow_up_reason`,`created_by`, `status`, `dateTime`) 
                                         VALUES ('$inserted_lead_id', '$follow_up_status', '$follow_up_date', '$follow_remarks', '$created_by', 'Active', '$dateTime' ) ");   
@@ -77,7 +63,7 @@
             $select_result = mysqli_fetch_assoc($select_lead_id);
             $selected_id = $select_result["id"];
             
-            $update_query2 = mysqli_query($conn,"UPDATE enquiry_data SET `travellers`='$traveller_count', `child`='$children_age', `from_date`='$from_date', `to_date`='$to_date', `days`='$travelling_days', `checklist`='$checklist', `budget`='$budget', `quoted_value`='$quoted_value' WHERE lead_id='$lead_id' ");
+            $update_query2 = mysqli_query($conn,"UPDATE enquiry_data SET `travellers`='$traveller_count', `child`='$children_age', `from_date`='$from_date', `to_date`='$to_date', `days`='$travelling_days' WHERE lead_id='$lead_id' ");
             
             $update_query3 = mysqli_query($conn,"UPDATE lead_destination SET `destination`='$destination' WHERE `lead_id`='$lead_id' ");
 
